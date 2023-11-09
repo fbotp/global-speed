@@ -42,6 +42,7 @@
 
   // 设置速度
   function setVideoSpeed() {
+    updateSpeedDisplay()
     clearTimeout(speedActionTimer)
     speedActionTimer = setTimeout( () => {
       const videos = document.getElementsByTagName('video')
@@ -94,7 +95,6 @@
         video.currentTime += 10 // 快进10秒
       }
     }
-    updateSpeedDisplay()
     e.stopPropagation()
   })
 })()
