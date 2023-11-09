@@ -87,7 +87,7 @@
   }
 
   document.addEventListener('keydown', function (e) {
-    if (!['A', 'a', 'D', 'd', 'S', 's', 'Z', 'z', 'X', 'x'].includes(e.key) || ['input', 'textarea'].includes(e.target.type)) {
+    if (!['A', 'a', 'D', 'd', 'S', 's', 'Z', 'z', 'X', 'x'].includes(e.key) || ['input', 'textarea'].includes(e.target.tagName.toLowerCase())) {
       return
     }
     if (['A', 'a'].includes(e.key)) {
