@@ -30,18 +30,6 @@
   document.body.appendChild(speedDisplay)
   let speedDisplayTimer = null // 显示计时器
 
-  // 限定上下界
-  function clamp(min, max, value) {
-    let clamped = value 
-    if (min != null) {
-      clamped = Math.max(min, clamped)
-    }
-    if (max != null) {
-      clamped = Math.min(max, clamped)
-    }
-    return clamped 
-  }
-
   // 显示倍速框
   function updateSpeedDisplay() {
     speedDisplay.style.display = 'block'
@@ -70,8 +58,7 @@
   // +/-速度
   function changeVideoSpeed(speedChange) {
     preSpeed = currentSpeed
-    currentSpeed += speedChange
-    currentSpeed = clamp(0.25, 20.00, currentSpeed)
+    currentSpeed = Math.min(20.00, Math.max(0.25, currentSpeed + speedChange))
     setVideoSpeed()
   }
 
@@ -87,21 +74,21 @@
   }
 
   document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || !['A', 'a', 'D', 'd', 'S', 's', 'Z', 'z', 'X', 'x'].includes(e.key) || ['input', 'textarea'].includes(e.target.tagName.toLowerCase())) {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || !['a', 'd', 's', 'z', 'x'].includes(e.key.toLowerCase()) || ['input', 'textarea'].includes(e.target.tagName.toLowerCase())) {
       return
     }
-    if (['A', 'a'].includes(e.key)) {
+    if (e.key.toLowerCase() === 'a') {
       changeVideoSpeed(-0.25) // 减速
-    } else if (['D', 'd'].includes(e.key)) {
+    } else if (e.key.toLowerCase() === 'd') {
       changeVideoSpeed(0.25) // 加速
-    } else if (['S', 's'].includes(e.key)) {
+    } else if (e.key.toLowerCase() === 's') {
       toggleVideoSpeed() // 切换到1.0倍速或当前倍速
-    } else if (['Z', 'z'].includes(e.key)) {
+    } else if (e.key.toLowerCase() === 'z') {
       const videos = document.getElementsByTagName('video')
       for (let video of videos) {
         video.currentTime -= 10 // 快退10秒
       }
-    } else if (['X', 'x'].includes(e.key)) {
+    } else if (e.key.toLowerCase() === 'x') {
       const videos = document.getElementsByTagName('video')
       for (let video of videos) {
         video.currentTime += 10 // 快进10秒
