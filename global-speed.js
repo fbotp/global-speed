@@ -67,7 +67,6 @@
         if (!['A', 'a', 'D', 'd', 'S', 's', 'Z', 'z', 'X', 'x'].includes(e.key) || ['input', 'textarea'].includes(e.target.type)) {
             return;
         }
-        console.log(e);
         if (['A', 'a'].includes(e.key)) {
             changeVideoSpeed(-0.25); // 减速
         } else if (['D', 'd'].includes(e.key)) {
